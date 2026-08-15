@@ -1,0 +1,336 @@
+[
+  {
+    "input_event_id": "evt_101",
+    "http_status": 201,
+    "api_response": {
+      "status": "success",
+      "event": {
+        "event_id": "evt_101",
+        "timestamp": "2026-08-15T10:00:00.000Z",
+        "agent_id": "agent_travel",
+        "user_id": "usr_alpha",
+        "session_id": "sess_001",
+        "query": "Book flight to Paris",
+        "tool_calls": [
+          {
+            "tool_name": "search_flights",
+            "action": "read",
+            "priority": 3
+          }
+        ],
+        "response": "Found flight AF123",
+        "state_before": {
+          "status": "initialized"
+        },
+        "state_after": {
+          "stage": "search",
+          "destination": "Paris"
+        },
+        "source_type": "real-time",
+        "_id": "6a8067e94259d6084a3390e3",
+        "createdAt": "2026-08-15T13:21:45.834Z",
+        "updatedAt": "2026-08-15T13:21:45.834Z",
+        "__v": 0
+      },
+      "audit": {
+        "event_id": "evt_101",
+        "decision_time": "2026-08-15T13:21:45.844Z",
+        "evidence_used": {
+          "event_ids": [
+            "evt_101"
+          ],
+          "timestamps": [
+            "2026-08-15T10:00:00.000Z"
+          ],
+          "session_ids": [
+            "sess_001",
+            "sess_001"
+          ]
+        },
+        "identity_resolution": {
+          "resolved_user_id": "usr_alpha",
+          "resolved_session_id": "sess_001",
+          "confidence_score": 0,
+          "match_reason": "No prior session overlap detected. Retaining provided session ID."
+        },
+        "state_final": {
+          "stage": "search",
+          "destination": "Paris"
+        },
+        "resolution_notes": "Event state ingested and resolved in standard temporal sequence.",
+        "_id": "6a8067e94259d6084a3390e6",
+        "createdAt": "2026-08-15T13:21:45.848Z",
+        "updatedAt": "2026-08-15T13:21:45.848Z",
+        "__v": 0
+      }
+    }
+  },
+  {
+    "input_event_id": "evt_101",
+    "http_status": 200,
+    "api_response": {
+      "status": "ignored",
+      "message": "Duplicate event detected with matching state. Processing skipped cleanly.",
+      "event_id": "evt_101"
+    }
+  },
+  {
+    "input_event_id": "evt_102",
+    "http_status": 201,
+    "api_response": {
+      "status": "success",
+      "event": {
+        "event_id": "evt_102",
+        "timestamp": "2026-08-15T10:10:00.000Z",
+        "agent_id": "agent_travel",
+        "user_id": "usr_alpha",
+        "session_id": "sess_001",
+        "query": "Confirm booking for Paris flight",
+        "tool_calls": [
+          {
+            "tool_name": "charge_credit_card",
+            "action": "execute",
+            "priority": 1
+          },
+          {
+            "tool_name": "analytics_logger",
+            "action": "write",
+            "priority": 5
+          }
+        ],
+        "response": "Payment processed",
+        "state_before": {
+          "stage": "search",
+          "destination": "Paris"
+        },
+        "state_after": {
+          "stage": "confirmed",
+          "destination": "Paris",
+          "payment": "success"
+        },
+        "source_type": "real-time",
+        "_id": "6a8067e94259d6084a3390ec",
+        "createdAt": "2026-08-15T13:21:45.961Z",
+        "updatedAt": "2026-08-15T13:21:45.961Z",
+        "__v": 0
+      },
+      "audit": {
+        "event_id": "evt_102",
+        "decision_time": "2026-08-15T13:21:45.966Z",
+        "evidence_used": {
+          "event_ids": [
+            "evt_102"
+          ],
+          "timestamps": [
+            "2026-08-15T10:10:00.000Z"
+          ],
+          "session_ids": [
+            "sess_001",
+            "sess_001"
+          ]
+        },
+        "identity_resolution": {
+          "resolved_user_id": "usr_alpha",
+          "resolved_session_id": "sess_001",
+          "confidence_score": 0,
+          "match_reason": "No prior session overlap detected. Retaining provided session ID."
+        },
+        "state_final": {
+          "stage": "confirmed",
+          "destination": "Paris",
+          "payment": "success"
+        },
+        "resolution_notes": "Event state ingested and resolved in standard temporal sequence.",
+        "_id": "6a8067e94259d6084a3390ef",
+        "createdAt": "2026-08-15T13:21:45.967Z",
+        "updatedAt": "2026-08-15T13:21:45.967Z",
+        "__v": 0
+      }
+    }
+  },
+  {
+    "input_event_id": "evt_103",
+    "http_status": 201,
+    "api_response": {
+      "status": "success",
+      "event": {
+        "event_id": "evt_103",
+        "timestamp": "2026-08-15T10:12:00.000Z",
+        "agent_id": "agent_travel",
+        "user_id": "usr_alpha",
+        "session_id": "sess_001",
+        "query": "Send Paris confirmation receipt",
+        "tool_calls": [
+          {
+            "tool_name": "send_email",
+            "action": "execute",
+            "priority": 2
+          }
+        ],
+        "response": "Receipt sent",
+        "state_before": {
+          "stage": "confirmed",
+          "destination": "Paris",
+          "payment": "success"
+        },
+        "state_after": {
+          "stage": "receipt_sent",
+          "destination": "Paris"
+        },
+        "source_type": "real-time",
+        "_id": "6a8067ea4259d6084a3390f4",
+        "createdAt": "2026-08-15T13:21:46.058Z",
+        "updatedAt": "2026-08-15T13:21:46.058Z",
+        "__v": 0
+      },
+      "audit": {
+        "event_id": "evt_103",
+        "decision_time": "2026-08-15T13:21:46.063Z",
+        "evidence_used": {
+          "event_ids": [
+            "evt_103"
+          ],
+          "timestamps": [
+            "2026-08-15T10:12:00.000Z"
+          ],
+          "session_ids": [
+            "sess_999",
+            "sess_001"
+          ]
+        },
+        "identity_resolution": {
+          "resolved_user_id": "usr_alpha",
+          "resolved_session_id": "sess_001",
+          "confidence_score": 0.5067,
+          "match_reason": "Resolved conflicting session sess_999 to canonical session sess_001 due to contextual similarity (0.20) and time proximity (0.97)."
+        },
+        "state_final": {
+          "stage": "receipt_sent",
+          "destination": "Paris"
+        },
+        "resolution_notes": "Event state ingested and resolved in standard temporal sequence.",
+        "_id": "6a8067ea4259d6084a3390f7",
+        "createdAt": "2026-08-15T13:21:46.063Z",
+        "updatedAt": "2026-08-15T13:21:46.063Z",
+        "__v": 0
+      }
+    }
+  },
+  {
+    "input_event_id": "evt_101_late",
+    "http_status": 201,
+    "api_response": {
+      "status": "success",
+      "event": {
+        "event_id": "evt_101_late",
+        "timestamp": "2026-08-15T10:05:00.000Z",
+        "agent_id": "agent_travel",
+        "user_id": "usr_alpha",
+        "session_id": "sess_001",
+        "query": "Add meal preference vegetarian",
+        "tool_calls": [
+          {
+            "tool_name": "update_prefs",
+            "action": "write",
+            "priority": 2
+          }
+        ],
+        "response": "Preference added",
+        "state_before": {
+          "stage": "search",
+          "destination": "Paris"
+        },
+        "state_after": {
+          "meal": "vegetarian"
+        },
+        "source_type": "offline",
+        "_id": "6a8067ea4259d6084a3390fc",
+        "createdAt": "2026-08-15T13:21:46.150Z",
+        "updatedAt": "2026-08-15T13:21:46.150Z",
+        "__v": 0
+      },
+      "audit": {
+        "event_id": "evt_101_late",
+        "decision_time": "2026-08-15T13:21:46.171Z",
+        "evidence_used": {
+          "event_ids": [
+            "evt_101_late"
+          ],
+          "timestamps": [
+            "2026-08-15T10:05:00.000Z"
+          ],
+          "session_ids": [
+            "sess_001",
+            "sess_001"
+          ]
+        },
+        "identity_resolution": {
+          "resolved_user_id": "usr_alpha",
+          "resolved_session_id": "sess_001",
+          "confidence_score": 0,
+          "match_reason": "No prior session overlap detected. Retaining provided session ID."
+        },
+        "state_final": {
+          "meal": "vegetarian"
+        },
+        "resolution_notes": "Late-arriving event ingested. State reconstruction triggered downstream replay successfully.",
+        "_id": "6a8067ea4259d6084a339104",
+        "createdAt": "2026-08-15T13:21:46.172Z",
+        "updatedAt": "2026-08-15T13:21:46.172Z",
+        "__v": 0
+      }
+    }
+  },
+  {
+    "replay_test": {
+      "target_event_id": "evt_102",
+      "replay_response": {
+        "replayed_event_id": "evt_102",
+        "timestamp": "2026-08-15T10:10:00.000Z",
+        "reconstructed_state": {
+          "stage": "confirmed",
+          "destination": "Paris",
+          "meal": "vegetarian",
+          "payment": "success"
+        },
+        "state_before": {
+          "stage": "search",
+          "destination": "Paris",
+          "meal": "vegetarian"
+        },
+        "audit_trail": {
+          "evidence_used": {
+            "event_ids": [
+              "evt_102"
+            ],
+            "timestamps": [
+              "2026-08-15T10:10:00.000Z"
+            ],
+            "session_ids": [
+              "sess_001",
+              "sess_001"
+            ]
+          },
+          "identity_resolution": {
+            "resolved_user_id": "usr_alpha",
+            "resolved_session_id": "sess_001",
+            "confidence_score": 0,
+            "match_reason": "No prior session overlap detected. Retaining provided session ID."
+          },
+          "_id": "6a8067e94259d6084a3390ef",
+          "event_id": "evt_102",
+          "decision_time": "2026-08-15T13:21:45.966Z",
+          "state_final": {
+            "stage": "confirmed",
+            "destination": "Paris",
+            "payment": "success"
+          },
+          "resolution_notes": "Event state ingested and resolved in standard temporal sequence.",
+          "createdAt": "2026-08-15T13:21:45.967Z",
+          "updatedAt": "2026-08-15T13:21:45.967Z",
+          "__v": 0
+        }
+      }
+    }
+  }
+]
