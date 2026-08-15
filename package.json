@@ -1,0 +1,18 @@
+{
+  "name": "ai-agent-state-reconciliation",
+  "version": "1.0.0",
+  "description": "Deterministic AI Agent State Reconciliation Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest --runInBand --detectOpenHandles"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0"
+  },
+  "devDependencies": {
+    "jest": "^29.6.4",
+    "supertest": "^6.3.3"
+  }
+}

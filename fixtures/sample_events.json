@@ -1,0 +1,75 @@
+[
+  {
+    "_comment": "Base Event: Normal initialization",
+    "event_id": "evt_101",
+    "timestamp": "2026-08-15T10:00:00Z",
+    "agent_id": "agent_travel",
+    "user_id": "usr_alpha",
+    "session_id": "sess_001",
+    "query": "Book flight to Paris",
+    "tool_calls": [{ "tool_name": "search_flights", "action": "read", "priority": 3 }],
+    "response": "Found flight AF123",
+    "state_before": null,
+    "state_after": { "stage": "search", "destination": "Paris" },
+    "source_type": "real-time"
+  },
+  {
+    "_comment": "Edge Case (a): Exact Duplicate Event (should be ignored cleanly)",
+    "event_id": "evt_101",
+    "timestamp": "2026-08-15T10:00:00Z",
+    "agent_id": "agent_travel",
+    "user_id": "usr_alpha",
+    "session_id": "sess_001",
+    "query": "Book flight to Paris",
+    "tool_calls": [{ "tool_name": "search_flights", "action": "read", "priority": 3 }],
+    "response": "Found flight AF123",
+    "state_before": null,
+    "state_after": { "stage": "search", "destination": "Paris" },
+    "source_type": "real-time"
+  },
+  {
+    "_comment": "Edge Case (d) & (e): Missing state_before (inferred) & Conflicting tool calls (prioritized)",
+    "event_id": "evt_102",
+    "timestamp": "2026-08-15T10:10:00Z",
+    "agent_id": "agent_travel",
+    "user_id": "usr_alpha",
+    "session_id": "sess_001",
+    "query": "Confirm booking for Paris flight",
+    "tool_calls": [
+      { "tool_name": "analytics_logger", "action": "write", "priority": 5 },
+      { "tool_name": "charge_credit_card", "action": "execute", "priority": 1 }
+    ],
+    "response": "Payment processed",
+    "state_before": null,
+    "state_after": { "stage": "confirmed", "destination": "Paris", "payment": "success" },
+    "source_type": "real-time"
+  },
+  {
+    "_comment": "Edge Case (b): Identity Conflict (Different session_id 'sess_999' linked back to 'sess_001')",
+    "event_id": "evt_103",
+    "timestamp": "2026-08-15T10:12:00Z",
+    "agent_id": "agent_travel",
+    "user_id": "usr_alpha",
+    "session_id": "sess_999",
+    "query": "Send Paris confirmation receipt",
+    "tool_calls": [{ "tool_name": "send_email", "action": "execute", "priority": 2 }],
+    "response": "Receipt sent",
+    "state_before": null,
+    "state_after": { "stage": "receipt_sent", "destination": "Paris" },
+    "source_type": "real-time"
+  },
+  {
+    "_comment": "Edge Case (c): Late Event (Timestamp 10:05:00 arrived after 10:10:00 events)",
+    "event_id": "evt_101_late",
+    "timestamp": "2026-08-15T10:05:00Z",
+    "agent_id": "agent_travel",
+    "user_id": "usr_alpha",
+    "session_id": "sess_001",
+    "query": "Add meal preference vegetarian",
+    "tool_calls": [{ "tool_name": "update_prefs", "action": "write", "priority": 2 }],
+    "response": "Preference added",
+    "state_before": null,
+    "state_after": { "meal": "vegetarian" },
+    "source_type": "offline"
+  }
+]
