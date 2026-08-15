@@ -13,5 +13,5 @@ A deterministic system designed to process asynchronous agent interaction logs, 
 
 1. **Clone repository:**
    ```bash
-   git clone <REPO_URL>
+   git clone https://github.com/anshu-man-6/AI-Agent-State-Reconciliation-with-Temporal-Evidence-and-Identity-Resolution.git
    cd ai-agent-state-reconciliation
